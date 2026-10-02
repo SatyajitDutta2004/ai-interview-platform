@@ -55,17 +55,22 @@ npm run dev
 
 ## Deployment Notes
 
+### Backend deployment on Render
+
+- Create a Web Service from this GitHub repository and set the root directory to `Backend`.
+- Use `npm install` as the build command and `npm start` as the start command.
+- Add `MONGO_URI`, `JWT_SECRET`, `GOOGLE_GENAI_API_KEY`, and `GOOGLE_GENAI_MODEL` as service environment variables.
+- Set `FRONTEND_URL` to the exact deployed frontend origin, without a trailing slash, and set `NODE_ENV` to `production`.
+- Render supplies `PORT`; the server uses it automatically.
+
 ### Frontend deployment on Vercel
 
-- Import the `Frontend` folder as the Vercel project
-- Set the project root to `Frontend`
-- Build command: `npm run build`
-- Output directory: `dist`
-- Add environment variables in Vercel dashboard if needed
+- Import this GitHub repository and set the project root to `Frontend`.
+- Use `npm run build` as the build command and `dist` as the output directory.
+- Set `VITE_API_URL` to the backend service origin, without a trailing slash or `/api` suffix.
+- After both services are deployed, make sure the Render `FRONTEND_URL` matches the Vercel production domain, then redeploy the backend.
 
-### Backend deployment
-
-This app is best deployed on a Node host such as Render or Railway, because Express is a long-running server and not ideal for default Vercel serverless hosting.
+Use the corresponding values in `Backend/.env` and `Frontend/.env` for local development. Never put real credentials in either `.env.example` file or commit real `.env` files. In MongoDB Atlas, allow network access from the backend host and use a database user with a strong password.
 
 ## Important
 

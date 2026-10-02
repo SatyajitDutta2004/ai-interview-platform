@@ -41,14 +41,15 @@ const connectToDB = require("./src/config/database");
 
 // const generateInterviewReport = require("./src/services/ai.service");
 
-connectToDB();
+const port = process.env.PORT || 3000;
 
-// generateInterviewReport({
-//   resume,
-//   selfDescription,
-//   jobDescription,
-// });
-
-app.listen(3000, () => {
-  console.log("server is running on port 3000");
-});
+connectToDB()
+  .then(() => {
+    app.listen(port, () => {
+      console.log(`server is running on port ${port}`);
+    });
+  })
+  .catch((error) => {
+    console.error("Failed to start server", error);
+    process.exit(1);
+  });
