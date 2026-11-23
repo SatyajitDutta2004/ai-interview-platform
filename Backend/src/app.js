@@ -5,6 +5,7 @@ const cors = require("cors");
 const app = express();
 const allowedOrigins = [
   process.env.FRONTEND_URL,
+  "https://ai-interview-platform-three-zeta.vercel.app",
   /^http:\/\/localhost:517[34]$/,
 ].filter(Boolean);
 
